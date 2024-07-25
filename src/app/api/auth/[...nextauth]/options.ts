@@ -80,7 +80,40 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    async signIn({ user, account }){
+      try {
+        await dbConnect();
+
+        if (user) {
+          const { email, name } = user;
+          console.log("Checking for existing user", email);
+          const existingUser = await UserModel.findOne({ email });
+
+          if (!existingUser) {
+            console.log("Creating new user", { email, name });
+            const newUser = new UserModel({
+              username: name || email?.split("@")[0],
+              email,
+              isVerified: true,
+              isAcceptingMessage: true,
+              messages: [],
+            });
+
+            await newUser.save();
+          }
+        }
+
+        return true; // Allow sign-in
+      } catch (error) {
+        console.error("Error during sign-in:", error);
+        throw new Error("An error occurred while signing in. Please try again later.");
+      }
+    }
+
+
   },
+
+
 
   pages: {
     signIn: "/sign-in",

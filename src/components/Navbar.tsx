@@ -16,10 +16,10 @@ const Navbar = () => {
     
 
   return (
-    <nav className='p-4 md:p-6 shadow-md'>
-        <div className='container mx-auto flex flex-col md:flex-row justify-between items-center'>
-            <h2 className='text-xl font-bold mb-4 md:mb-0'>AnonyFeddback</h2>
-            <div className='space-x-4'>
+    <nav className=' py-2 md:px-2 shadow-md  fixed top-0 z-20    shadow-gray-800 w-full bg-black '>
+        <div className=' py-2 md:py-1 px-5 mx-auto flex justify-center  sm:justify-between items-center'>
+            <h2 className='sm:text-3xl text-2xl  text-white   font-extrabold tracking-wider '>AnonyFeddback</h2>
+            <div className='space-x-2 hidden sm:block'>
             {
                 session?(
                     <>
@@ -29,12 +29,12 @@ const Navbar = () => {
                 ):(
                     <>
                      <Link href='/sign-in' passHref>
-                                <button className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'>
+                                <button className='px-2 py-2   text-white rounded  transition-colors'>
                                     Login
                                 </button>
                             </Link>
                             <Link href='/signup' passHref>
-                                <button className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'>
+                                <button className='px-2 py-2  text-white rounded  transition-colors'>
                                     Sign Up
                                 </button>
                             </Link>

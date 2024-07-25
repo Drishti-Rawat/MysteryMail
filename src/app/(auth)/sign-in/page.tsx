@@ -34,8 +34,8 @@ const {status} = useSession()
     (async () => {
       try {
         const res = await getProviders();
-        console.log("Raw providers response:", res);
-        setProviders(res || {});
+        console.log("Providers fetched:", res); // Log to verify the content
+        setProviders(res);
       } catch (error) {
         console.error("Error fetching providers:", error);
       }
