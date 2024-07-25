@@ -3,17 +3,17 @@ import mongoose,{Schema,Document} from "mongoose";
 // user message interface and schema
 
 export interface Message extends Document{
-    conetnt : string;
-    createdat : Date
+    content : string;
+    createdAt : Date
 }
 
 const MessageSchema: Schema<Message> = new Schema({
 
-    conetnt:{
+    content:{
         type:String,
         required:true
     },
-    createdat:{
+    createdAt:{
         type:Date,
         required:true,
         default:Date.now
@@ -66,7 +66,7 @@ const UserSchema: Schema<User> = new Schema({
       default:false
     },
    isAcceptingMessage:{
-        type:Boolean,
+        type:Boolean, 
       default:false
     },
   messages:[MessageSchema]
