@@ -26,7 +26,6 @@ import { Loader2 } from "lucide-react";
 import { signIn, getProviders, useSession } from "next-auth/react";
 import { Vortex } from "@/components/ui/vortex";
 
-
 const page = () => {
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
@@ -42,7 +41,7 @@ const page = () => {
   const router = useRouter();
 
   // fetch oauth providers
-  
+
   useEffect(() => {
     const fetchProviders = async () => {
       const res = await getProviders();
@@ -52,13 +51,13 @@ const page = () => {
   }, []);
 
   useEffect(() => {
-    if (status === 'authenticated') {
+    if (status === "authenticated") {
       toast({
         title: "Sign-up successful",
         description: "You have been signed up",
-        variant: "default"
+        variant: "default",
       });
-      router.replace('/dashboard');
+      router.replace("/dashboard");
     }
   }, [status, toast, router]);
 
@@ -106,7 +105,7 @@ const page = () => {
 
       const response = await axios.post("/api/signup", data);
 
-      console.log(response)
+      console.log(response);
 
       if (response.data.success === true) {
         toast({
@@ -141,72 +140,107 @@ const page = () => {
         baseHue={160}
         className="flex items-center flex-col justify-center   w-full h-full"
       >
-    <div className="   ">
-      <div className="w-full max-w-md  p-8 space-y-8 bg-[#112f4dcc] text-white  rounded-lg shadow-md">
-        <div className="text-center ">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 ">
-            Join <span className="text-amber-400">Anonymous</span> Feedback
-          </h1>
-          <p className="mb-4">Sign Up to start your anounymous adventure</p>
-        </div>
+        <div className="   ">
+          <div className="w-full max-w-md  p-8 space-y-8 bg-[#112f4dcc] text-white  rounded-lg shadow-md">
+            <div className="text-center ">
+              <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 ">
+                Join <span className="text-amber-400">Anonymous</span> Feedback
+              </h1>
+              <p className="mb-4">Sign Up to start your anounymous adventure</p>
+            </div>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" placeholder="username" {...field} onChange={(e)=>{
-                      field.onChange(e)
-                      debounced(e.target.value)}} />
-                  </FormControl>
-                  {
-                        isCheckingUsername&&  <Loader2 className="animate-spin"/>
-                      }
-                      <p className={`${usernameMessage==="Username is available"?"text-green-500":"text-red-500"} text-[12px]`}> {usernameMessage}</p>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" type="password" placeholder="username" {...field}  />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200"
+                          placeholder="username"
+                          {...field}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            debounced(e.target.value);
+                          }}
+                        />
+                      </FormControl>
+                      {isCheckingUsername && (
+                        <Loader2 className="animate-spin" />
+                      )}
+                      <p
+                        className={`${
+                          usernameMessage === "Username is available"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        } text-[12px]`}
+                      >
+                        {" "}
+                        {usernameMessage}
+                      </p>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200"
+                          placeholder="Email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200"
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <Button type="submit" disabled={isSubmitting} className=" bg-cyan-400/55 hover:bg-cyan-700/55 transition-colors delay-150 w-full px-3 py-2 ">
-              {
-            isSubmitting?(<><Loader2 className="animate-spin"/> Please wait</>):("signup")
-            }
-            </Button>
-          </form>
-        </Form>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className=" bg-cyan-400/55 hover:bg-cyan-700/55 transition-colors delay-150 w-full px-3 py-2 "
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin" /> Please wait
+                    </>
+                  ) : (
+                    "signup"
+                  )}
+                </Button>
+              </form>
+            </Form>
 
-        {/* <div className="text-center mt-2 space-y-3 ">
+            {/* <div className="text-center mt-2 space-y-3 ">
           <p>Or sign up with:</p>
           <div className="flex justify-center space-x-4">
             {providers?.github && (
@@ -228,15 +262,20 @@ const page = () => {
                </div>
              </div> */}
 
-        <div className="text-center mt-4">
-          <p>
-            Already a member? <Link href="/sign-in" className="text-amber-400 hover:text-amber-600">Sign in</Link>
-          </p>
-
+            <div className="text-center mt-4">
+              <p>
+                Already a member?{" "}
+                <Link
+                  href="/sign-in"
+                  className="text-amber-400 hover:text-amber-600"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    </Vortex>
+      </Vortex>
     </div>
   );
 };

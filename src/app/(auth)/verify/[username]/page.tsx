@@ -89,41 +89,6 @@ const page = () => {
 
         </div>
 
-        
-
-
-{/* <Form {...form}>
-  <form onSubmit={(e)=>{e.preventDefault()
-      console.log('Form submitted')
-      
-      console.log('Form values:', form.getValues());
-      console.log('Form errors:', form.formState.errors);
-      form.handleSubmit(onSubmit)}} className='space-y-6'>
-  <FormField
-              control={form.control}
-              name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Verification Code</FormLabel>
-                  <FormControl>
-                    <Input placeholder="" {...field}  />
-                  </FormControl>
-                 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" disabled={isSubmitting} onClick={() => {
-    console.log('Button clicked');
-    console.log('Form state:', form.formState);
-  }} className="  w-full px-3 py-2 ">
-              Verify
-            </Button>
-          
-  </form>
-
-</Form> */}
-
 <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
            
@@ -135,7 +100,7 @@ const page = () => {
                 <FormItem>
                   <FormLabel>Verification Code</FormLabel>
                   <FormControl>
-                    <Input  placeholder="Code" {...field}  />
+                    <Input  className='bg-gray-50 px-2' placeholder="Code" {...field}  />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
