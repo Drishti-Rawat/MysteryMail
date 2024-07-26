@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { signInSchema } from "@/schemas/signInSchema";
 import { signIn , getProviders, useSession } from "next-auth/react";
+import { Vortex } from "@/components/ui/vortex";
 
 const page = () => {
   const [providers, setProviders] = useState<any>({});
@@ -100,11 +101,19 @@ const {status} = useSession()
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="w-full   h-screen overflow-hidden">
+    <Vortex
+      backgroundColor="dark"
+      rangeY={700}
+      particleCount={500}
+      baseHue={200}
+      className="flex items-center flex-col justify-center   w-full h-full"
+    >
+    <div className="   ">
+      <div className="w-full max-w-md p-8 space-y-8 bg-[#112f4dcc] text-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join Anonymous Feedback
+            Join <span className="text-amber-400">Anonymous</span>  Feedback
           </h1>
           <p className="mb-4">Sign In to start your anounymous adventure</p>
         </div>
@@ -118,7 +127,7 @@ const {status} = useSession()
                 <FormItem>
                   <FormLabel>Email/Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email/Username" {...field} />
+                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" placeholder="Email/Username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -131,7 +140,7 @@ const {status} = useSession()
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="username" {...field} />
+                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" type="password" placeholder="username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,14 +150,14 @@ const {status} = useSession()
             <Button
               type="submit"
               
-              className="  w-full px-3 py-2 "
+              className="  w-full px-3 py-2 bg-cyan-400/55 hover:bg-cyan-700/55 transition-colors delay-150 "
             >
               Signin
             </Button>
           </form>
         </Form>
 
-        <div className="text-center mt-4">
+        {/* <div className="text-center mt-4">
           <p>Or sign in with:</p>
           <div className="flex justify-center space-x-4 mt-4">
             {providers.github && (
@@ -168,16 +177,18 @@ const {status} = useSession()
               </Button>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="text-center mt-4">
           <p>
             Don't have an account?{" "}
-            <Link href="/signup" className="text-blue-600 hover:text-blue-800">
+            <Link href="/signup" className="text-amber-400 hover:text-amber-600">
               Signup
             </Link>
           </p>
         </div>
       </div>
+    </div>
+    </Vortex>
     </div>
   );
 };

@@ -143,24 +143,23 @@ const page = () => {
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  
 
   console.log("Messages:", messages);
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className=" min-h-screen bg-gray-50 px-5 py-16">
+      {!isLoading?(<div className="my-8    py-20 mx-auto lg:p-6  p-5  space-y-10  rounded w-full max-w-xl md:max-w-5xl lg:max-w-7xl">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-4">Welcome Back, <span className="text-amber-400"> {username}</span></h1>
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{" "}
-        <div className="flex items-center">
+        <div className="flex items-center bg-gray-100  shadow-lg ">
           <input
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="input input-bordered  w-full p-2 mr-3"
           />
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
@@ -206,6 +205,14 @@ const page = () => {
           <p>No messages to display.</p>
         )}
       </div>
+    </div>):(
+      <div className="flex justify-center items-center h-screen">
+        <Loader2 className="h-10 w-10 animate-spin"/>
+      </div>
+    )
+
+      }
+    
     </div>
   );
 };

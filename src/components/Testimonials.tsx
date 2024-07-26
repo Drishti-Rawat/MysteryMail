@@ -12,16 +12,16 @@ import {
 
 const Testimonials = () => {
   return (
-     <div className="flex bg-gradient-to-br px-8 overflow-hidden from-black via-black to-blue-900 flex-col justify-center items-center py-20 text-white">
+     <div className="flex bg-gradient-to-b px-8  border-b   border-slate-800  from-black via-black to-blue-950 flex-col justify-center items-center py-24 text-white">
 
       <section className="text-center mb-8 md:mb-12 mt-14">
-        <h1 className="sm:text-3xl text-xl md:text-5xl font-bold ">Dive into the world Of Anonymous Conversastion </h1>
+        <h1 className="sm:text-3xl text-xl md:text-4xl font-bold ">Dive into the world Of Anonymous Conversastion </h1>
         <p className="mt-3 md:mt-4 text-[14px] md:text-lg ">Explore Anonymous Feedback - Where Your identity remains a secret</p>
       </section>
 
       <Carousel 
       plugins={[Autoplay({delay:1500})]}
-      className="w-full max-w-sm md:max-w-md lg:max-w-lg  mt-10 ">
+      className="w-full max-w-md lg:max-w-lg  mt-10 ">
       <CarouselContent className="">
        {
         messages?(

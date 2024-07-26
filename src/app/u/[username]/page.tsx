@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Loader2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CardHeader, CardContent, Card } from '@/components/ui/card';
@@ -23,12 +23,12 @@ import { ApiResponse } from '@/types/ApiResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { MessagesSchema } from '@/schemas/messageSchema';
+import questions from '@/Data/sugesstedMessage.json'
 
-const specialChar = '||';
+import { Loader2 } from 'lucide-react';
 
-const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split(specialChar);
-};
+
+
 
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
@@ -74,36 +74,40 @@ export default function SendMessage() {
     }
   };
 
-  const fetchSuggestedMessages = async () => {
+
+  const getRandomQuestions = (count: number) => {
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  const fetchSuggestedMessages = () => {
     setIsSuggestLoading(true);
     try {
-      const response = await axios.post('/api/suggest-messages', {}, {
-        responseType: 'stream',
-      });
-
-      let result = '';
-      for await (const chunk of response.data) {
-        result += chunk.toString();
-      }
-
-      setSuggestedMessages(parseStringMessages(result));
+      const randomQuestions = getRandomQuestions(3);
+      setSuggestedMessages(randomQuestions);
     } catch (error) {
       console.error('Error fetching messages:', error);
       toast({
         title: 'Error',
-        description: 'Failed to fetch suggested messages',
+        description: 'Failed to fetch suggested messages. Please try again.',
         variant: 'destructive',
       });
     } finally {
       setIsSuggestLoading(false);
     }
   };
+   
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
-        Public Profile Link
+    <div className=' min-h-screen overflow-hidden z-20  flex flex-col items-center bg-gray-100 py-10 justify-center rounded-lg'>
+     
+ 
+
+    <div className="container mx-auto   p-6  rounded max-w-6xl space-y-10">
+      <h1 className="text-4xl font-bold mb-6 text-center z-20">
+        Welcome to <span className='text-amber-500'>MysteryMail</span>
       </h1>
+      <p></p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -115,7 +119,7 @@ export default function SendMessage() {
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
-                    className="resize-none"
+                    className="resize-none shadow-xl"
                     {...field}
                   />
                 </FormControl>
@@ -123,14 +127,14 @@ export default function SendMessage() {
               </FormItem>
             )}
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center  ">
             {isLoading ? (
               <Button disabled>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
+              <Button type="submit" className='' disabled={isLoading || !messageContent}>
                 Send It
               </Button>
             )}
@@ -138,7 +142,9 @@ export default function SendMessage() {
         </form>
       </Form>
 
-      <div className="space-y-4 my-8">
+    
+
+       <div className="space-y-4 my-8">
         <div className="space-y-2">
           <Button
             onClick={fetchSuggestedMessages}
@@ -156,16 +162,16 @@ export default function SendMessage() {
           </Button>
           <p>Click on any message below to select it.</p>
         </div>
-        <Card>
+        <Card className='shadow-xl bg-gray-50'>
           <CardHeader>
             <h3 className="text-xl font-semibold">Messages</h3>
           </CardHeader>
-          <CardContent className="flex flex-col space-y-4">
+          <CardContent className="flex flex-col space-y-3">
             {suggestedMessages.map((message, index) => (
               <Button
                 key={index}
                 variant="outline"
-                className="mb-2"
+                className="mb-2  hover:bg-[#ebebeb]"
                 onClick={() => handleMessageClick(message)}
               >
                 {message}
@@ -180,7 +186,9 @@ export default function SendMessage() {
         <Link href={'/sign-up'}>
           <Button>Create Your Account</Button>
         </Link>
-      </div>
+      </div> 
+     
+    </div>
     </div>
   );
-}
+  }

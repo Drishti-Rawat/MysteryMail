@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { signIn, getProviders, useSession } from "next-auth/react";
+import { Vortex } from "@/components/ui/vortex";
 
 
 const page = () => {
@@ -132,11 +133,19 @@ const page = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Join Anonymous Feedback
+    <div className="w-full   h-screen overflow-hidden">
+      <Vortex
+        backgroundColor="dark"
+        rangeY={800}
+        particleCount={500}
+        baseHue={160}
+        className="flex items-center flex-col justify-center   w-full h-full"
+      >
+    <div className="   ">
+      <div className="w-full max-w-md  p-8 space-y-8 bg-[#112f4dcc] text-white  rounded-lg shadow-md">
+        <div className="text-center ">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 ">
+            Join <span className="text-amber-400">Anonymous</span> Feedback
           </h1>
           <p className="mb-4">Sign Up to start your anounymous adventure</p>
         </div>
@@ -150,14 +159,14 @@ const page = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} onChange={(e)=>{
+                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" placeholder="username" {...field} onChange={(e)=>{
                       field.onChange(e)
                       debounced(e.target.value)}} />
                   </FormControl>
                   {
                         isCheckingUsername&&  <Loader2 className="animate-spin"/>
                       }
-                      <p className={`${usernameMessage==="Username is available"?"text-green-600":"text-red-600"} text-[12px]`}> {usernameMessage}</p>
+                      <p className={`${usernameMessage==="Username is available"?"text-green-500":"text-red-500"} text-[12px]`}> {usernameMessage}</p>
                   <FormMessage />
                 </FormItem>
               )}
@@ -169,7 +178,7 @@ const page = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" {...field} />
+                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" placeholder="Email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -182,14 +191,14 @@ const page = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="username" {...field}  />
+                    <Input className="text-black font-semibold focus-visible:ring-cyan-600 outline-none  shadow-sm shadow-cyan-200" type="password" placeholder="username" {...field}  />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" disabled={isSubmitting} className="  w-full px-3 py-2 ">
+            <Button type="submit" disabled={isSubmitting} className=" bg-cyan-400/55 hover:bg-cyan-700/55 transition-colors delay-150 w-full px-3 py-2 ">
               {
             isSubmitting?(<><Loader2 className="animate-spin"/> Please wait</>):("signup")
             }
@@ -197,7 +206,7 @@ const page = () => {
           </form>
         </Form>
 
-        <div className="text-center mt-4 ">
+        {/* <div className="text-center mt-2 space-y-3 ">
           <p>Or sign up with:</p>
           <div className="flex justify-center space-x-4">
             {providers?.github && (
@@ -217,15 +226,17 @@ const page = () => {
               </Button>
                )}
                </div>
-             </div>
+             </div> */}
 
         <div className="text-center mt-4">
           <p>
-            Already a member? <Link href="/sign-in" className="text-blue-600 hover:text-blue-800">Sign in</Link>
+            Already a member? <Link href="/sign-in" className="text-amber-400 hover:text-amber-600">Sign in</Link>
           </p>
 
         </div>
       </div>
+    </div>
+    </Vortex>
     </div>
   );
 };

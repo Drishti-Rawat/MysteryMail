@@ -5,6 +5,7 @@ import {  Shield, User ,Lock, icons} from 'lucide-react';
 
 
 
+
 export const features = [
   {
     title: "Anonymous Feedback",
@@ -24,6 +25,7 @@ export const features = [
 ];
 
 const Features = () => {
+  
   return (
     <div className='border-b border-slate-800'>
 

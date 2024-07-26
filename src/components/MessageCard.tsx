@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import dayjs from 'dayjs';
 import {
   Card,
@@ -22,11 +22,12 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import { Button } from "@/components/ui/button"
-import { X } from "lucide-react";
+import { Delete, Trash, X } from "lucide-react";
 import { Message } from "@/model/User";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
+
 
 
 type MessageCardProp = {
@@ -36,7 +37,10 @@ type MessageCardProp = {
     
 }
 
+
+
 const MessageCard = ({message,onMessageDelete}:MessageCardProp) => {
+
 
     const {toast} = useToast()
 
@@ -60,14 +64,22 @@ const MessageCard = ({message,onMessageDelete}:MessageCardProp) => {
     }
 
   return (
-    <Card className="card-bordered">
-      <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle>{message.content}</CardTitle>
+
+    <Card className="card-bordered shadow-xl py-5  bg-[#e6dfdf]">
+       <CardContent>
+        <div className="flex justify-between items-center ">
+          <CardDescription className="sm:text-lg text-[15px] ">{message.content}</CardDescription>
+         
+        </div>
+        </CardContent>
+
+        <CardFooter>
+        <div className="text-sm w-full flex justify-between items-center">
+         <div className=" text-[12px]">{dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}</div> 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant='destructive'>
-                <X className="w-5 h-5" />
+              <Button className="">
+               <Trash className="h-4 w-4"/>
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -89,11 +101,8 @@ const MessageCard = ({message,onMessageDelete}:MessageCardProp) => {
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <div className="text-sm">
-          {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
-        </div>
-      </CardHeader>
-      <CardContent></CardContent>
+        </CardFooter>
+     
     </Card>
   );
 };

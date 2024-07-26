@@ -3,10 +3,13 @@
 import { TypewriterEffect } from "./ui/typewriter-effect";
 
 import { LampContainer } from "./ui/lamp";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
+import { useRef } from "react";
 
 export function Hero() {
+  
+
   const words = [
     {
       text: "Share",
@@ -23,7 +26,10 @@ export function Hero() {
     },
   ];
   return (
-    <div className="h-[70vh] md:h-[90vh] lg:h-[100vh] overflow-hidden border-b border-slate-800 ">
+    <div
+      className="h-[70vh] md:h-[90vh] lg:h-[100vh] overflow-hidden border-b border-slate-800 " 
+     
+      >
     <LampContainer>
       <motion.h1
         initial={{ opacity: 0.5, y: 100 }}
