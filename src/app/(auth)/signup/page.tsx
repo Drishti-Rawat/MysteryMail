@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useDebounceValue, useDebounceCallback } from "usehooks-ts";
 import { useRouter } from "next/navigation";
-import { signUpSchema } from "@/schema/signUpSchema";
+import { signUpSchema } from "@/schemas/signUpSchema";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 import {

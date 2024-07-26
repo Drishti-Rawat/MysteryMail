@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { signInSchema } from "@/schema/signInSchema";
+import { signInSchema } from "@/schemas/signInSchema";
 import { signIn , getProviders, useSession } from "next-auth/react";
 import { Vortex } from "@/components/ui/vortex";
 
@@ -31,21 +31,21 @@ const {status} = useSession()
   const { toast } = useToast();
   const router = useRouter();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await getProviders();
-        console.log("Providers fetched:", res); // Log to verify the content
-        setProviders(res);
-      } catch (error) {
-        console.error("Error fetching providers:", error);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const res = await getProviders();
+  //       console.log("Providers fetched:", res); // Log to verify the content
+  //       setProviders(res);
+  //     } catch (error) {
+  //       console.error("Error fetching providers:", error);
+  //     }
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    console.log("Providers state:", providers);
-  }, [providers]);
+  // useEffect(() => {
+  //   console.log("Providers state:", providers);
+  // }, [providers]);
 
 
   useEffect(() => {
