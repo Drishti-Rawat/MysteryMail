@@ -22,7 +22,7 @@ import * as z from 'zod';
 import { ApiResponse } from '@/types/ApiResponse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { MessagesSchema } from '@/schemas/messageSchema';
+import { MessagesSchema } from '@/schema/messageSchema';
 import questions from '@/Data/sugesstedMessage.json'
 
 import { Loader2 } from 'lucide-react';

@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { signInSchema } from "@/schemas/signInSchema";
+import { signInSchema } from "@/schema/signInSchema";
 import { signIn , getProviders, useSession } from "next-auth/react";
 import { Vortex } from "@/components/ui/vortex";
 

@@ -3,7 +3,7 @@ import { authOptions } from "../auth/[...nextauth]/options";
 import { User } from "next-auth";
 import dbConnect from "@/lib/dbconnect";
 import UserModel from "@/model/User";
-import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
+import { acceptMessageSchema } from "@/schema/acceptMessageSchema";
 
 export async function POST(request: Request) {
   await dbConnect();
