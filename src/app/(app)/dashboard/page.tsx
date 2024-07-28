@@ -17,7 +17,7 @@ import { redirect, useRouter } from "next/navigation";
 import React, { use, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const page = () => {
+const Dashboardpage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
@@ -217,4 +217,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Dashboardpage;
