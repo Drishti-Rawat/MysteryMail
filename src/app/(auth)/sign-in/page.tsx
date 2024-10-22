@@ -25,7 +25,7 @@ import { signInSchema } from "@/schemas/signInSchema";
 import { signIn, getProviders, useSession } from "next-auth/react";
 import { Vortex } from "@/components/ui/vortex";
 
-const page = () => {
+const SignInpage = () => {
   // const [providers, setProviders] = useState<any>({});
   const { status } = useSession();
   const { toast } = useToast();
@@ -202,4 +202,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignInpage;

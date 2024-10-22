@@ -26,7 +26,7 @@ import { Loader2 } from "lucide-react";
 import { signIn, getProviders, useSession } from "next-auth/react";
 import { Vortex } from "@/components/ui/vortex";
 
-const page = () => {
+const SignUppage = () => {
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
   const [isCheckingUsername, setisCheckingUsername] = useState(false);
@@ -280,4 +280,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUppage;
